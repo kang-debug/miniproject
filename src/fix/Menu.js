@@ -1,12 +1,15 @@
 import './Menu.css';
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/userSlice';
 
-export default function Menu({ handleLogout }) {
+export default function Menu() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const logoutAndRedirect = () => {
-    handleLogout();  // userData 초기화
-    navigate('/');  // 로그인 페이지로 이동
+    dispatch(logout());
+    navigate('/');
   };
 
   return (
@@ -27,8 +30,11 @@ export default function Menu({ handleLogout }) {
         <li className='nav-item'>
           <Link to="/5" className="nav-link">5</Link>
         </li>
-        <li className='nav-item myPage'>
+        <li className='nav-item'>
           <Link to="/main" className="nav-link">My Page</Link>
+        </li>
+        <li className='nav-item'>
+          <Link to="/ranking" className="nav-link">Ranking</Link>
         </li>
         <li className='nav-item logout-btn' onClick={logoutAndRedirect}>
           Log out

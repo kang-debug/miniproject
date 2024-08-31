@@ -75,7 +75,26 @@ app.post('/login', (req, res) => {
     });
   });
 });
+app.get('/user/:username', (req, res) => {
+  const { username } = req.params;
 
+  const query = `
+      SELECT username, coin, 
+             FIND_IN_SET(coin, (SELECT GROUP_CONCAT(coin ORDER BY coin DESC) FROM users)) AS rank 
+      FROM users WHERE username = ?`;
+
+  db.query(query, [username], (err, results) => {
+      if (err) {
+          console.error('Database query error:', err);
+          return res.status(500).send('Database error');
+      }
+      if (results.length > 0) {
+          res.status(200).send(results[0]);
+      } else {
+          res.status(404).send('User not found');
+      }
+  });
+});
 
 app.post('/update-coin', (req, res) => {
   const { username, coin } = req.body;
@@ -91,6 +110,18 @@ app.post('/update-coin', (req, res) => {
       res.status(200).send('Coin value updated successfully');
     }
   );
+});
+
+
+app.get('/ranking', (req, res) => {
+
+  db.query('SELECT username, coin FROM users ORDER BY coin DESC', (err, results) => {
+    if (err) {
+      return res.status(500).send('Database error');
+    }
+
+    res.status(200).send(results);
+  });
 });
 
 app.listen(3001, () => {

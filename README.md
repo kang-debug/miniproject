@@ -1,1 +1,1 @@
-fork
+Redux 사용

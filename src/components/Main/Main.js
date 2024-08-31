@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Main.css';
 import Profile from './profile';
-import axios from 'axios'; 
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserCoin } from '../../redux/userSlice';
 
-function Main({ userData, updateUserData }) {  
-    const [userCoin, setUserCoin] = useState(userData.coin); 
+function Main() {
+    const userData = useSelector((state) => state.user.userData);
+    const dispatch = useDispatch();
 
-    const coinUpBtn = async () => {
-        const newCoinValue = userCoin + 1;  
-
-        setUserCoin(newCoinValue);
-        try {
-           
-            await axios.post('http://localhost:3001/update-coin', {
-                username: userData.username,
-                coin: newCoinValue
-            });
-
-            
-            updateUserData({ ...userData, coin: newCoinValue });
-        } catch (error) {
-            console.error('Error updating coin:', error);
-        }
-    };
+    const coinUpBtn = () => {
+        dispatch(updateUserCoin(1)); 
+        axios.post('http://localhost:3001/update-coin', {
+          username: userData.username,
+          coin: userData.coin + 1,
+        });
+      };
+    
 
     return (
         <div className='main'>
@@ -34,14 +28,14 @@ function Main({ userData, updateUserData }) {
                 <table>
                     <thead>
                         <tr>
-                            <th>User</th>
-                            <th>Coin</th>
+                            <th>이름</th>
+                            <th>보유 코인</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>{userData.username}</td>
-                            <td>{userCoin}</td> 
+                            <td>{userData.coin}</td> 
                         </tr>
                     </tbody>
                 </table>
@@ -51,3 +45,4 @@ function Main({ userData, updateUserData }) {
 }
 
 export default Main;
+

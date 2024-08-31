@@ -4,8 +4,11 @@ import axios from 'axios';
 import Svg1 from './svg1';
 import Svg2 from './svg2';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/userSlice';
 
-export default ({ setIsLoggedIn, setUserData }) => {
+export default ({}) => {
+    const dispatch = useDispatch();
     const [isSignUp, setIsSignUp] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -55,10 +58,7 @@ export default ({ setIsLoggedIn, setUserData }) => {
             password: password
         }).then(response => {
             alert(response.data);
-            setUsername('');
-            setPassword('');
-            setRepeatPassword('');
-            setIsSignUp(false);
+            changeSignIn();
         }).catch(error => {
             if (error.response && error.response.status === 400) {
                 alert('이미 사용 중인 이름입니다');
@@ -82,8 +82,7 @@ export default ({ setIsLoggedIn, setUserData }) => {
           password: password
         }).then(response => {
           if (response.data.message === 'Login successful') {
-            setIsLoggedIn(true);
-            setUserData(response.data.userData); 
+            dispatch(login(response.data.userData));
             navigate('/main');
           } else {
             alert('Invalid username or password');
