@@ -71,8 +71,9 @@ img {
 }
 
 .moleScoreTime button {
-    color: #030a2a;
+    color: white;
     font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .mole {
