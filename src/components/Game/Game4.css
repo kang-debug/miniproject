@@ -1,0 +1,66 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* 스크롤바 제거 */
+}
+
+.game-container {
+    position: relative;
+    width: 800px;
+    height: 200px;
+    border: 2px solid #000;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+#dino {
+    position: absolute;
+    width: 50px; /* 공룡의 크기 */
+    bottom: 0;
+}
+
+.cactus, .bird, .rock {
+    position: absolute;
+    bottom: 0;
+    width: 20px;
+    height: 40px;
+}
+
+.cactus {
+    background-color: #0f0;
+}
+
+.bird {
+    background-color: #f00;
+    width: 30px;
+    height: 20px;
+    bottom: 50px; /* 새 장애물은 공중에 위치 */
+}
+
+.rock {
+    background-color: #555;
+    width: 25px;
+    height: 25px;
+}
+
+.cactus.top, .bird.top {
+    bottom: auto;
+    top: 80px; /* 하늘에 나타나는 장애물의 위치 조정 */
+}
+
+.score {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
