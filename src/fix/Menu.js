@@ -25,12 +25,6 @@ export default function Menu() {
           <Link to="/3" className="nav-link">3</Link>
         </li>
         <li className='nav-item'>
-          <Link to="/4" className="nav-link">4</Link>
-        </li>
-        <li className='nav-item'>
-          <Link to="/5" className="nav-link">5</Link>
-        </li>
-        <li className='nav-item'>
           <Link to="/main" className="nav-link">My Page</Link>
         </li>
         <li className='nav-item'>

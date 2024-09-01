@@ -10,8 +10,8 @@ import Main from './components/Main/Main';
 import Game1 from './components/Game/Game1';
 import Game2 from './components/Game/Game2';
 import Game3 from './components/Game/Game3';
-import Game4 from './components/Game/Game4';
-import Game5 from './components/Game/Game5';
+
+
 import Ranking from './components/Ranking/Ranking';
 import { logout } from './redux/userSlice';
 
@@ -89,26 +89,7 @@ function App() {
               )
             }
           />
-          <Route
-            path="/4"
-            element={
-              isLoggedIn ? (
-                <Game4 />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          />
-          <Route
-            path="/5"
-            element={
-              isLoggedIn ? (
-                <Game5 />
-              ) : (
-                <Navigate to="/" />
-              )
-            }
-          />
+          
           <Route
             path="*"
             element={<Navigate to={isLoggedIn ? "/main" : "/"} />}
