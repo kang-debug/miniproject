@@ -13,6 +13,7 @@ export default () => {
     const [isGameRunning, setIsGameRunning] = useState(false);
     //두더지 클릭시 점수
     const [score, setScore] = useState(0)
+    const [upCoin, setUpCoin] = useState(0);
     const moleClickScore = () => {
         setScore(score + 1)
     }
@@ -38,11 +39,11 @@ export default () => {
                 }, 500);
                 setTime((prevTime) => {
                     if (prevTime === 1) {
-                        alert(` 점수는 ${score} 입니다. 점수만큼 코인이 증가합니다.`)
-                        dispatch(updateUserCoin(+score));
+                        alert(` 점수는 ${score} 이고 증가 코인은 ${Math.floor(score/5)}개입니다 .`);
+                        dispatch(updateUserCoin(+Math.floor(score/5)));
                         axios.post('http://localhost:3001/update-coin', {
                             username: userData.username,
-                            coin: userData.coin + score,
+                            coin: userData.coin + Math.floor(score/5),
                         });
                         setIsGameRunning(false)
                         setScore(0)
