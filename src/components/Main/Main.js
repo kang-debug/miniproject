@@ -9,14 +9,18 @@ function Main() {
     const userData = useSelector((state) => state.user.userData);
     const dispatch = useDispatch();
 
+    // coinUpBtn 처럼 (updateUserCoin("여기에 증감소할 값을 넣어 주시면 됩니다"))
     const coinUpBtn = () => {
-        dispatch(updateUserCoin(1)); 
+        if (userData.coin === 0) {
+            dispatch(updateUserCoin(1)); 
         axios.post('http://localhost:3001/update-coin', {
           username: userData.username,
           coin: userData.coin + 1,
         });
+        } else{
+            alert("Coin이 0일 때 적용됩니다!");
+        }
       };
-    
 
     return (
         <div className='main'>
