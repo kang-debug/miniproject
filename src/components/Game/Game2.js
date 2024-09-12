@@ -34,6 +34,16 @@ export default () => {
                 }
             }, 30);
 
+<<<<<<< HEAD
+  return (
+    <div>
+      <button onClick={handleCoinDecrease}>Decrease Coin</button>
+    </div>
+  );
+}
+
+export default Game2;
+=======
             // 충돌 감지: 장애물과 공룡의 위치가 겹칠 때 게임 오버
             if (obstaclePosition < 10 && obstaclePosition > 0 && position < 50) {
                 dispatch(updateUserCoin(+Math.floor(score / 5)));
@@ -114,3 +124,4 @@ export default () => {
 
     )
 }
+>>>>>>> upstream/main
